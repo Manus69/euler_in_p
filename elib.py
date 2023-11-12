@@ -112,3 +112,13 @@ def gcd(* args) -> int:
 
 def lcm(* args) -> int:
     return math.lcm(* args)
+
+def pythagorean_triplet_gen(max_side) -> (int, int, int):
+    m, n = 2, 1
+
+    while (m < max_side):
+        n = 1
+        while (n < m):
+            yield (m * m - n * n, 2 * m * n, m * m + n * n)
+            n += 1
+        m += 1

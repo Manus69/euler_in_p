@@ -1,6 +1,6 @@
 # import math
 import elib
-import p8
+import p10
 
 if __name__ == "__main__":
-    p8.p8()
+    p10.p10()
