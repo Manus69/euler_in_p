@@ -158,6 +158,20 @@ def trianglen_gen() -> int:
         yield n * (n + 1) // 2
         n += 1
 
+def get_rect_array(rows, cols, default_val):
+    array = []
+    for row in range(rows):
+        array.append([default_val] * cols)
+    
+    return array
+
+def get_triangular_array(rows, default_val):
+    array = []
+    for row in range(rows):
+        array.append([default_val] * (1 + row))
+
+    return array
+
 class Table:
     def __init__(self, vals: list, rows, cols):
         self.vals = vals
