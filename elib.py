@@ -1,4 +1,6 @@
 import math
+from operator import mul
+from functools import reduce
 
 NO_IDX = -1
 
@@ -41,19 +43,25 @@ def _sieve_new(size):
 def _size_from_prime_count(count: int) -> int:
     return count * 25
 
+_SIEVE_DC = 1 << 10
 class Sieve:
-    def __init__ (self, size):
+    def __init__ (self, size = _SIEVE_DC):
         self.vals = _sieve_new(size)
     
     def resize(self, size):
         self.vals = _sieve_new(size)
 
-    def get_all_primes(self):
+    def get_primes_lt(self, n):
+        if (n >= len(self.vals)): self.resize(n + 1)
+
         primes = []
-        for idx in range(len(self.vals)):
-            if (self.vals[idx]): primes.append(idx)
-        
+        for idx in range(n):
+            if (self.is_prime(idx)): primes.append(idx)
+
         return primes
+
+    def get_all_primes(self):
+        return self.get_primes_lt(len(self.vals) - 1)
     
     def is_prime(self, n):
         if (n >= len(self.vals)): self.resize(n + 1)
@@ -73,7 +81,6 @@ class Sieve:
 
         return primes
 
-
 def get_prime_factors(n: int):
     factors = []
     p = 2
@@ -88,13 +95,34 @@ def get_prime_factors(n: int):
     return factors
 
 def get_prime_factors_sieve(n: int, sieve: Sieve) -> list:
-    if (sieve.is_prime(n)): return [n]
+    if sieve.is_prime(n): return [n]
 
-    primes = []
-    for k in range(n):
-        if sieve.is_prime(k): primes.append(k)
+    primes = sieve.get_primes_lt(n)
+    divisors = []
 
-    return primes
+    for p in primes:
+        if p > n: break
+        while n % p == 0:
+            divisors.append(p)
+            n //= p
+
+    return divisors
+
+def count_divisors(n: int) -> int:
+    p_powers = []
+    p = 2
+
+    if n == 1: return 1
+
+    while n >= p:
+        if n % p == 0:
+            p_powers.append(0)
+            while n % p == 0:
+                p_powers[-1] += 1
+                n //= p
+        p += 1
+    
+    return reduce(mul, [x + 1 for x in p_powers])
 
 def is_palindrome(s: str):
     if (len(s) == 0): return True
@@ -122,6 +150,13 @@ def pythagorean_triplet_gen(max_side) -> (int, int, int):
             yield (m * m - n * n, 2 * m * n, m * m + n * n)
             n += 1
         m += 1
+
+def trianglen_gen() -> int:
+    n = 0
+    
+    while True:
+        yield n * (n + 1) // 2
+        n += 1
 
 class Table:
     def __init__(self, vals: list, rows, cols):
