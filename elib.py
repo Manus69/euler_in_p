@@ -94,6 +94,24 @@ def get_prime_factors(n: int):
     
     return factors
 
+def get_divisors(n: int):
+    divisors = [1]
+    if n == 1: return divisors
+    
+    d = 2
+
+    while d * d < n:
+        if n % d == 0:
+            divisors.append(d)
+            divisors.append(n // d)
+        
+        d += 1
+
+    if d * d == n: divisors.append(d)
+    divisors.append(n)
+
+    return divisors
+
 def get_prime_factors_sieve(n: int, sieve: Sieve) -> list:
     if sieve.is_prime(n): return [n]
 
