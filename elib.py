@@ -153,7 +153,7 @@ def pythagorean_triplet_gen(max_side) -> (int, int, int):
 
 def trianglen_gen() -> int:
     n = 0
-    
+
     while True:
         yield n * (n + 1) // 2
         n += 1
@@ -167,6 +167,9 @@ class Table:
     def get(self, row, col):
         return self.vals[row * self.cols + col]
     
+    def set(self, row, col, val):
+        self.vals[row * self.cols + col] = val
+
     def n_rows(self):
         return self.rows
     
