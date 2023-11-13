@@ -122,3 +122,28 @@ def pythagorean_triplet_gen(max_side) -> (int, int, int):
             yield (m * m - n * n, 2 * m * n, m * m + n * n)
             n += 1
         m += 1
+
+class Table:
+    def __init__(self, vals: list, rows, cols):
+        self.vals = vals
+        self.rows = rows
+        self.cols = cols
+    
+    def get(self, row, col):
+        return self.vals[row * self.cols + col]
+    
+    def n_rows(self):
+        return self.rows
+    
+    def n_cols(self):
+        return self.cols
+
+    def __str__(self) -> str:
+        _str = []
+        for row in range(self.rows):
+            for col in range(self.cols):
+                _str.append(str(self.get(row, col)))
+                _str.append(" ")
+            _str.append("\n")
+            
+        return "".join(_str)
