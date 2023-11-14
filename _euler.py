@@ -1,6 +1,6 @@
 # import math
 import elib
-import p21
+import p22
 
 if __name__ == "__main__":
-    p21.p21()
+    p22.p22()
