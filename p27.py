@@ -25,8 +25,8 @@ def _find_max(sieve: elib.Sieve):
             current = _count_primes(a, b, sieve)
             if current > max_n: max_a, max_b, max_n = a, b, current
     
-    return _coeff_product(max_a, max_b)
+    return max_a, max_b
 
 def p27():
     sieve = elib.Sieve(_A * _B)
-    print(_find_max(sieve))
+    print(_coeff_product(* _find_max(sieve)))

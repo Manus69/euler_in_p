@@ -263,3 +263,14 @@ def fib_gen() -> int:
 
 def count_digits(x: int) -> int:
     return math.log10(x or 1) + 1
+
+def to_digits(x : int):
+    digits = []
+    while True:
+        digits.append(x % 10)
+        x //= 10
+        if x == 0: break
+    
+    digits.reverse()
+    
+    return digits
