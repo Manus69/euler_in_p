@@ -254,3 +254,12 @@ class Permutation:
         left = len(self.vals) - suffix_len - 1
         right = self._find_first_greater(suffix_len)
         self._swap_rev(left, right)
+
+def fib_gen() -> int:
+    f0, f1 = 0, 1
+    while True:
+        yield f0
+        f0, f1 = f1, f0 + f1
+
+def count_digits(x: int) -> int:
+    return math.log10(x or 1) + 1
