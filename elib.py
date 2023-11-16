@@ -97,7 +97,7 @@ def get_prime_factors(n: int):
 def get_divisors(n: int):
     divisors = [1]
     if n == 1: return divisors
-    
+
     d = 2
 
     while d * d < n:
@@ -217,3 +217,40 @@ class Table:
             _str.append("\n")
             
         return "".join(_str)
+
+def rev(_list: list, idx, _len):
+    _list[idx : idx + _len] = _list[idx + _len - 1 : idx - 1 : -1]
+
+class Permutation:
+    def _get_suffix_len(self):
+        idx = len(self.vals) - 1
+        while idx > 0:
+            if self.vals[idx] > self.vals[idx - 1]: break
+            idx -= 1
+        
+        return len(self.vals) - idx
+    
+    def _find_first_greater(self, suffix_len):
+        val = self.vals[len(self.vals) - suffix_len - 1]
+        for idx in range(len(self.vals) - 1, 0, -1):
+            if self.vals[idx] > val: return idx
+        
+        raise RuntimeError
+
+    def _swap_rev(self, left, right):
+        self.vals[left], self.vals[right] = self.vals[right], self.vals[left]
+        rev(self.vals, left + 1, len(self.vals) - left - 1)
+
+    def __init__(self, vals: list):
+        self.vals = vals
+
+    def __iter__(self):
+        return self
+    
+    def __next__ (self):
+        suffix_len = self._get_suffix_len()
+        if suffix_len == len(self.vals): raise StopIteration
+        
+        left = len(self.vals) - suffix_len - 1
+        right = self._find_first_greater(suffix_len)
+        self._swap_rev(left, right)
