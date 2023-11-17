@@ -1,6 +1,6 @@
 import elib
 import pprint
-import p35
+import p36
 
 if __name__ == "__main__":
-    p35.p35()
+    p36.p36()

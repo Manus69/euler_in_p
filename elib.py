@@ -142,7 +142,7 @@ def count_divisors(n: int) -> int:
     
     return reduce(mul, [x + 1 for x in p_powers])
 
-def is_palindrome(s: str):
+def is_palindrome(s):
     if (len(s) == 0): return True
 
     left, right = 0, len(s) - 1
@@ -264,13 +264,15 @@ def fib_gen() -> int:
 def count_digits(x: int) -> int:
     return math.log10(x or 1) + 1
 
-def to_digits(x : int):
+def to_digits(x : int , base = 10):
     digits = []
     while True:
-        digits.append(x % 10)
-        x //= 10
+        digits.append(x % base)
+        x //= base
         if x == 0: break
-    
+
     digits.reverse()
-    
     return digits
+
+def to_digits_bin(x : int):
+    return to_digits(x, 2)
