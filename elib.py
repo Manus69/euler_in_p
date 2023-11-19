@@ -192,6 +192,23 @@ def trianglen_gen() -> int:
         yield n * (n + 1) // 2
         n += 1
 
+def pentagn_gen() -> int:
+    n = 0
+
+    while True:
+        yield n * (3 * n - 1) // 2
+        n += 1
+
+def hexagn_gen() -> int:
+    n = 0
+
+    while True:
+        yield n * (2 * n - 1)
+        n += 1
+
+def quadratic_root_p(a, b, c) -> float:
+    return ((- b + math.sqrt(b * b - 4 * a * c)) / (2 * a))
+
 def get_rect_array(rows, cols, default_val):
     array = []
     for row in range(rows):
