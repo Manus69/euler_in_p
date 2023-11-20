@@ -94,6 +94,15 @@ def get_prime_factors(n: int):
     
     return factors
 
+def is_prime(x : int) -> bool:
+
+    p = 2
+    while p * p <= x:
+        if x % p == 0: return False
+        p += 1
+    
+    return True
+
 def get_divisors(n: int):
     divisors = [1]
     if n == 1: return divisors
