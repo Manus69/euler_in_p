@@ -295,7 +295,7 @@ def fib_gen() -> int:
         f0, f1 = f1, f0 + f1
 
 def count_digits(x: int) -> int:
-    return math.log10(x or 1) + 1
+    return int(math.log10(x or 1)) + 1
 
 def to_digits(x : int , base = 10):
     digits = []
