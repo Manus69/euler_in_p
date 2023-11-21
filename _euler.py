@@ -1,7 +1,7 @@
 import elib
 import random
-import p62
+import p67
 
 if __name__ == "__main__":
-    p62.p62()
+    p67.p67()
     
